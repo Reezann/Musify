@@ -50,7 +50,7 @@
             ?>
             <input type="text" name="uname" placeholder="enter your username" class="box" required>
             <input type="password" name="password" placeholder="enter password" class="box" required>
-            <input type="submit" value="login now" name="submit" class="form-btn">
+            <input type="submit" value="login  now" name="submit" class="form-btn">
             <p>Don't have a account?<a href="register.php">Register now</a></p>
         </form>
 

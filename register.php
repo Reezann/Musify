@@ -69,7 +69,7 @@
         ?>
         <input type="text" name="name" placeholder="enter name" class="box" required>
         <input type="text" name="uname" placeholder="enter username" class="box" required>
-        <input type="email" name="email" placeholder="enter email" class="box" required>
+        <input type="email" name="email" placeholder="enter  email" class="box" required>
         <input type="password" name="password" placeholder="enter password" class="box" required>
         <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
         <input type="submit" value="register now" name="submit" class="form-btn">
