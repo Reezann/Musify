@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+}
+
+.container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding-bottom: 80px;
+}
+
+.container .content{
+    width:500px;
+    text-align: center;
+}
+
+.container .content h3{
+  font-size: 5vw;
+  text-transform: uppercase;  
+}
+
+.container .content p{
+    font-size: 20px;
+    padding:10px 0 ;
+}
+
+.container .content p span{
+    color: crimson;
+}
+
+.container .content .logout{
+    display: inline-block;
+    margin-top: 10px;
+    background: #000;
+    color: #fff;
+    padding: 10px 35px;
+    font-size: 20px;
+}
+
+.container .content .logout:hover{
+    background: crimson;
+}
+
+
+.form-container{
+    min-height: 100vh;
+    display: flex;
+    align-items:last baseline;
+    justify-content: center;
+    background: black;
+    padding-bottom: 5%;
+   
+}
+
+.form-container form{
+    text-align: center;
+    width: 400px;
+    min-height: 200px;
+    max-height: 400px;
+    background: #d88383;
+    border:2px solid #bb184b;
+    padding: 10px;
+}
+
+.form-container form h3{
+    font-size: 20 px;
+    text-transform: uppercase;
+}
+
+.form-container form .box{
+    width: 100%;
+    height: 30px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border:2px solid #bb184b;
+    margin: 5px 0;
+}
+
+.form-container form .form-btn{
+    display: block;
+    margin-top: 10px;
+    background: #bb184b;
+    color: #000000;
+    padding: 1px 5px;
+    font-size: 20px;
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+}
+
+.form-container form .form-btn:hover{
+    background: crimson;
+}
+
+.form-container form p{
+    font-size: 15px;
+    padding-top: 10px;
+}
+
+.form-container form p a{
+    font-weight: bold;
+    font-size: 20px;
+    color: #bb184b;
+}
+
+.form-container form p a:hover{
+   color: crimson;
+}
