@@ -1,3 +1,0 @@
-# Musify
-
-Spotify-Clone
