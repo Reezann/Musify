@@ -5,27 +5,35 @@
         <div class="navigation">
             <ul>
                 <li>
-                    <a href="">
+                    <a href="admin_index.php">
                         <span class="fa fa-home"></span>
-                        <span>Search</span>
+                        <span>Home</span>
                         
                     </a>
                 </li>
                 <li>
-                    <a href="browse.php">
+                    <a href="add_song.php">
                         <span class="fa fa-plus"></span>
-                        <span>Browse</span>
+                        <span>Add Songs</span>
                     </a>
                 </li>
                 <li>
-                    <a href="create_playlist.php">
+                    <a href="add_album.php">
                         <span class="fa fa-plus"></span>
-                        <span>Your Music</span>
+                        <span>Add Album</span>
                     </a>
                 </li>
+            </ul>
+        </div>
+</div>  
+<div class="main-container">
+    <div class="top-bar">
+        <div class="navbar">
+            <ul>
                 <li>
                     <a href="login.php">Logout</a>
                 </li>
             </ul>
         </div>
-</div> 
+    </div>
+</div>

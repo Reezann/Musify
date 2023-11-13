@@ -36,7 +36,7 @@
         // If the user doesn't exist and passwords match, insert the user's data into the database.
         $insert="INSERT INTO users(name,username,email,password) VALUES('$name','$uname','$email','$password')";
         mysqli_query($conn,$insert);
-        header('location:header.php');// Redirect to the header.php page upon successful registration.
+        header('location:user.php');// Redirect to the header.php page upon successful registration.
       }
     }
 

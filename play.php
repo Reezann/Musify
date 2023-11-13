@@ -1,9 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-a.css">
+
     <script src="https://kit.fontawesome.com/065ccc13d0.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -12,10 +15,15 @@ include("config.php");
 
 if (isset($_GET['id'])) {
     $id = $_GET['id']; // Retrieve the 'id' from the URL parameter
-    $result = mysqli_query($conn, "SELECT * FROM songs WHERE id = $id");
+    $query1 = mysqli_query($conn, "SELECT * FROM songs WHERE id = $id");
     
-    if ($result) {
-        $row = mysqli_fetch_assoc($result); // Fetch the row as an associative array
+    if ($query1) {
+        $row = mysqli_fetch_assoc($query1); // Fetch the row as an associative array
+        $album_id = $row['album_id'];
+        $query2 = mysqli_query($conn, "SELECT artist.name FROM artist, songs WHERE artist.id = " . $row['artist_id'] . " LIMIT 1");
+        if($query2){
+            $row1 = mysqli_fetch_assoc($query2);
+        }
     } else {
         // Handle the case where there's an issue with the query
     }
@@ -28,16 +36,22 @@ if (isset($row)) {
         <div class='container'>
             <div class='music-player'>
                 <nav>
-                    <div class='circle'>
-                        <i class='fa-solid fa-angle-left'></i>
-                    </div>
+                    <div class='circle'>";
+                        if($album_id!=0){
+                            echo "<a href='disp_album_songs.php?id=$album_id'>$<i class='fa-solid fa-angle-left'></i></a>";
+                        }
+                        else{
+                             echo"<a href='add_song.php'><i class='fa-solid fa-angle-left'></i></a>";
+                        }
+
+                echo"    </div>
                     <div class='circle'>
                         <i class='fa-solid fa-bars'></i>
                     </div>
                 </nav>
                 <img src='" . $row['image'] . "' class='song-img' alt='NOOOOT'>
-                <h1>hellloooo</h1>
-                <p>Luis Fonsi</p>
+                <h1>" . $row['title'] . " </h1>
+                <p>" . $row1['name'] . "</p>
                 <audio controls>
                     <source src='" . $row['path'] . "' type='audio/mpeg'>
                 </audio>
