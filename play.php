@@ -11,6 +11,7 @@
 </head>
 <body>
 <?php
+session_start();
 include("config.php");
 
 if (isset($_GET['id'])) {
@@ -37,12 +38,18 @@ if (isset($row)) {
             <div class='music-player'>
                 <nav>
                     <div class='circle'>";
+                    if (isset($_SESSION['user_id'])){
+                        echo "<a href='browse.php'><i class='fa-solid fa-angle-left'></i></a>";
+
+                    }
+                    else{
                         if($album_id!=0){
-                            echo "<a href='disp_album_songs.php?id=$album_id'>$<i class='fa-solid fa-angle-left'></i></a>";
+                            echo "<a href='disp_album_songs.php?id=$album_id'><i class='fa-solid fa-angle-left'></i></a>";
                         }
                         else{
                              echo"<a href='add_song.php'><i class='fa-solid fa-angle-left'></i></a>";
                         }
+                    }
 
                 echo"    </div>
                     <div class='circle'>

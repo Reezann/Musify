@@ -2,7 +2,7 @@
 <?php
 session_start();
   include "config.php";
-
+  $_SESSION['myPlaylist'] = 'set';
   if (isset($_POST['create'])) {
         $name = $_POST['name'];
         if(isset($_SESSION['user_id'])) {
@@ -40,7 +40,7 @@ session_start();
 </div>
 
 <?php
-    // include"display_songs.php";
+    include"disp_playlist.php";
 ?>
 
 </form>
