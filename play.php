@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
     if ($query1) {
         $row = mysqli_fetch_assoc($query1); // Fetch the row as an associative array
         $album_id = $row['album_id'];
-        $query2 = mysqli_query($conn, "SELECT artist.name FROM artist, songs WHERE artist.id = " . $row['artist_id'] . " LIMIT 1");
+        $query2 = mysqli_query($conn, "SELECT artist.name FROM artist, songs WHERE artist.id = " . $row['artist_id'] . "");
         if($query2){
             $row1 = mysqli_fetch_assoc($query2);
         }
@@ -38,13 +38,13 @@ if (isset($row)) {
             <div class='music-player'>
                 <nav>
                     <div class='circle'>";
-                    if (isset($_SESSION['user_id'])){
+                    if ($_SESSION['uname'] != 'admin'){
                         echo "<a href='browse.php'><i class='fa-solid fa-angle-left'></i></a>";
 
                     }
                     else{
                         if($album_id!=0){
-                            echo "<a href='disp_album_songs.php?id=$album_id'><i class='fa-solid fa-angle-left'></i></a>";
+                            echo "<a href='disp_album_songs.php?album_id=$album_id'><i class='fa-solid fa-angle-left'></i></a>";
                         }
                         else{
                              echo"<a href='add_song.php'><i class='fa-solid fa-angle-left'></i></a>";

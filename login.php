@@ -17,11 +17,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['uname'] = $uname;
         $_SESSION['user_id'] = $res['id'];
 
-        if ($uname == 'admin') {
-            header('location: admin_index.php');
-        } else {
-            header('location: user.php');
-        }
+        header('location: user.php');
+
     } else {
         $error[] = 'Incorrect username or password';
     }

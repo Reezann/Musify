@@ -7,6 +7,8 @@
    
     <!--custom css file link -->
     <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="style-a.css" >
+
 </head>
 <body>
     
@@ -14,6 +16,8 @@
   session_start();
     include('config.php');
     include('nav.php');
+    include("display_songs.php");
+    include("display_album.php");
     ?>
 
 </body>

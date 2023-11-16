@@ -4,7 +4,7 @@
 
     while($row = mysqli_fetch_array($query)){
         echo "<div class='gridViewItem'>
-            <a href='disp_album_songs.php?id=" . $row['id'] . "'>
+            <a href='disp_album_songs.php?album_id=" . $row['id'] . "'>
                 <img src='" . $row['img'] . "'>
                 <div class='gridViewInfo'>" . $row['title'] . "</div>
             </a>

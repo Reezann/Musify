@@ -2,7 +2,7 @@
 <?php
 session_start();
   include "config.php";
-  $_SESSION['myPlaylist'] = 'set';
+
   if (isset($_POST['create'])) {
         $name = $_POST['name'];
         if(isset($_SESSION['user_id'])) {
@@ -22,6 +22,7 @@ session_start();
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style-a.css">
+    <link rel="stylesheet" href="style.css">
 
   </head>
   
@@ -39,9 +40,23 @@ session_start();
     </form>
 </div>
 
-<?php
-    include"disp_playlist.php";
-?>
+<div class="gridViewContainer">
+    <?php
+    // fetch and display playlists
+        $u_id = $_SESSION['user_id'];
+        
+        $query = mysqli_query($conn, "SELECT * FROM playlist WHERE user_id = $u_id");
+
+        while($row = mysqli_fetch_array($query)){
+            echo "<div class='gridViewItem'>
+                <a href='disp_album_songs.php?playlist_id=" . $row['id'] . "'>
+                    <img src='Images/playlist.jpg'>
+                    <div class='gridViewInfo'>" . $row['name'] . "</div>
+                </a>
+            </div>";
+        }
+    ?>
+</div>
 
 </form>
   </body>
