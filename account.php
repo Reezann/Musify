@@ -1,13 +1,13 @@
 <?php
-session_start();
- include 'config.php';
-// include 'nav.php';
- $user_id=$_SESSION['user_id'];
- $query="SELECT * FROM users WHERE id=$user_id";
- $result=mysqli_query($conn,$query);
- if(mysqli_num_rows($result)>0){
-    $data=mysqli_fetch_array($result);
- }
+   session_start();
+   include 'config.php';
+   // include 'nav.php';
+   $user_id=$_SESSION['user_id'];
+   $query="SELECT * FROM users WHERE id=$user_id";
+   $result=mysqli_query($conn,$query);
+   if(mysqli_num_rows($result)>0){
+      $data=mysqli_fetch_array($result);
+   }
  ?>
 
  <!DOCTYPE html>
@@ -19,9 +19,8 @@ session_start();
     <link rel="stylesheet" href="style-a.css">
  </head>
  <body>
-    <?php
-        echo "<div>Name = '" . $data['name'] . "' ";
-
-?>
+   <?php
+      echo "<div>Name = '" . $data['name'] . "' ";
+   ?>
  </body>
  </html>

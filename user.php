@@ -1,3 +1,10 @@
+<?php 
+  session_start();
+    include "config.php";
+    include "common_functions.php";
+    include "delete.php";
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +20,7 @@
 <body>
     
   <?php
-  session_start();
-    include('config.php');
+
     include('nav.php');
     include("display_songs.php");
     include("display_album.php");

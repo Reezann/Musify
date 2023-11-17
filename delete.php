@@ -1,11 +1,12 @@
-<!-- deleting a song -->
+
 <?php 
-    
     // Check if a song should be deleted
     if (isset($_POST['delete']) && isset($_POST['id'])) {
         $id = $_POST['id'];
-        
-        // Delete the row
+        //delete from playlist
+        $deleteSql = "DELETE FROM `playlistsongs` WHERE id = $id";
+        $conn->query($deleteSql);
+        // Delete from song database
         $deleteSql = "DELETE FROM `songs` WHERE id = $id";
         $conn->query($deleteSql);
 
@@ -35,7 +36,7 @@
         echo 'if (typeof songDeleted !== "undefined" && songDeleted) {';
         echo'  <script>var songDeleted = true;
         location.reload();</script>';
-        echo '}';
+ 
     }
     ?>
 </script> 

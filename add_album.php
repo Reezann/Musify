@@ -3,6 +3,7 @@ session_start();
 include "config.php";
 include "nav.php";
 include "common_functions.php";
+    include "delete.php";
 ?>
 
 <!DOCTYPE html>

@@ -2,6 +2,8 @@
 <?php
 session_start();
   include "config.php";
+  include "common_functions.php";
+  include "delete.php";
 
   if (isset($_POST['create'])) {
         $name = $_POST['name'];
