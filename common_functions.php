@@ -1,100 +1,21 @@
-
+<!-- checking if artist already exists -->
 <?php
-//add album-songs
-  if (isset($_POST['add_song'])) {
-    
-    if(isset($_POST['albumId'])){
-        $titles = $_POST['title'];
-        $paths = $_POST['path'];
-        $no = $_POST['no']; 
-        $albumId = $_POST['albumId']; 
-        $artistId = $_POST['artistId']; // Retrieve artistId from the form
-        $image = $_POST['image']; // Retrieve image path from the form
+ function check_artist($artist,$conn){
 
-        for ($i = 0; $i < $no; $i++) {
-            $title = $titles[$i];
-            $path = $paths[$i];
-
-            $q3 = "INSERT INTO `songs`(`title`, `path`,`image`,`album_id`,`artist_id`) VALUES ('$title', '$path','$image','$albumId','$artistId')";
-            $queryy = mysqli_query($conn, $q3);
-        }
-    }
-    //add songs
-    else{
-    $artist = $_POST['artist'];
     $select = "SELECT id FROM artist WHERE name='$artist'";
-    $result = mysqli_query($conn, $select);
+    $result1 = mysqli_query($conn, $select);
 
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result); // Fetch the result
+    if (mysqli_num_rows($result1) > 0) {
+        $row = mysqli_fetch_assoc($result1); // Fetch the result
         $artistId = $row['id']; // Get the 'id' value
     } else {
         $q1 = "INSERT INTO `artist`(`name`) VALUES ('$artist')";
         $query1 = mysqli_query($conn, $q1);
         $artistId = mysqli_insert_id($conn);
     }
-
-    $title = $_POST['title'];
-    $path = $_POST['path'];
-    $image = $_POST['image'];
-    $q = "INSERT INTO `songs`(`title`, `path`, `image`, `artist_id`) VALUES ('$title', '$path', '$image', '$artistId') ";
-    $query = mysqli_query($conn, $q);
-    }   
-  }
-
+return $artistId;
+}
 ?>
-
-
-
-<?php
-//add album details
-    if (isset($_POST['add_album'])) {
-        $artist = $_POST['artist'];
-        $select = "SELECT id FROM artist WHERE name='$artist'";
-        $result1 = mysqli_query($conn, $select);
-
-        if (mysqli_num_rows($result1) > 0) {
-            $row = mysqli_fetch_assoc($result1); // Fetch the result
-            $artistId = $row['id']; // Get the 'id' value
-        } else {
-            $q1 = "INSERT INTO `artist`(`name`) VALUES ('$artist')";
-            $query1 = mysqli_query($conn, $q1);
-            $artistId = mysqli_insert_id($conn);
-        }
-
-        $title = $_POST['titlee'];
-        $image = $_POST['imagee'];
-        $no = $_POST['no'];
-        $q2 = "INSERT INTO `album`(`title`, `img`,`artist_id`) VALUES ('$title', '$image','$artistId')";
-        $query2 = mysqli_query($conn, $q2);
-        if($query2){
-            $albumId = mysqli_insert_id($conn);
-            echo"hello $albumId";    
-
-            if ($query2) {
-                echo '<form method="post">'; // New form for song details
-                echo '<input type="hidden" name="albumId" value="' . $albumId . '">'; // Pass the album ID
-                echo '<input type="hidden" name="artistId" value="' . $artistId . '">'; // Pass the artist ID
-                echo '<input type="hidden" name="no" value="' . $no . '">'; // Pass the value of $no to the second form
-                echo '<input type="hidden" name="image" value="' . $image . '">'; // Pass the path of $image to the second form
-
-                for ($counter = 1; $counter <= $no; $counter++) {
-                    echo "<div class='formm'>
-                        <label>Title of Song $counter:</label>
-                        <input type='text' class='form-control' name='title[]' placeholder='Enter title of song' required>
-
-                        <label>Path of Song $counter:</label>
-                        <input type='text' class='form-control' name='path[]' placeholder='Enter Music path' required>
-                        <p><br></p>";
-                }
-                echo "<button type='submit' class='btn btn-success' name='add_song'>Add Songs</button><br>";
-                echo '</form>'; // Close the song details form
-            }
-
-        }
-    }
-?>
-
 
 
 <!-- adding song to playlist -->
@@ -103,7 +24,7 @@
         $songID = $_POST['id']; // The song ID from the form
         $playlistName = $_POST['add_playlist']; // The selected playlist name
         $u_id = $_SESSION['user_id'];
-        // Logic to retrieve the playlist ID based on the name
+        //retrieve the playlist ID based on the name
         $query = mysqli_query($conn, "SELECT id FROM playlist WHERE name = '$playlistName' AND user_id = $u_id");
         $playlist = mysqli_fetch_assoc($query);
 
@@ -117,23 +38,23 @@
     }
 ?>
 
-
-
+<!-- displaying songs -->
 <?php
  function display_songs($songsQuery, $conn) {
+    echo'<div class="viewContainer">';
     while ($row = mysqli_fetch_array($songsQuery)) {
         echo "<div class='viewItem'>
-            <a href='play.php?id=" . $row['id'] . "'>
+            <a href='play.php?song_id=" . $row['id'] . "'>
                 <img src='" . $row['image'] . "'>
                 <div class='viewInfo'>" . $row['title'] . "</div>
             </a>";
 
+            echo "<form method='post' class='btnn'>";
             //delete option for playlist
             if (isset($_GET['playlist_id']) ){
-                echo "<form method='post'>
-                            <input type='hidden' name='id' value='" . $row['id'] . "'>
-                            <button type='submit' class='btn' name='delete_playlist_song'>Delete</button>
-                        </form>";
+                           echo" <input type='hidden' name='id' value='" . $row['id'] . "'>
+                            <button type='submit' class='btn' name='delete_playlist_song'>Delete</button>";
+                        //</form>";
                
             }
             else{
@@ -141,8 +62,8 @@
                 if (isset($_SESSION['uname']) && $_SESSION['uname'] == 'admin') {
                     echo "<form method='post'>
                         <input type='hidden' name='id' value='" . $row['id'] . "'>
-                        <button type='submit' class='btn' name='delete'>Delete</button>
-                    </form>";
+                        <button type='submit' class='btn' name='delete'>Delete</button>";
+                    //</form>";
                 }
                 
                 echo "<form method='post'>
@@ -150,16 +71,62 @@
                     <select name='add_playlist' class='btn' onchange='this.form.submit()'>
                     <option disabled selected>+ Playlist</option>";
                 
-                // fetch and display playlists
+                // display playlists option
                 $u_id = $_SESSION['user_id'];
                 $query = mysqli_query($conn, "SELECT * FROM playlist WHERE user_id = $u_id");
                 while ($playlist_row = mysqli_fetch_array($query)) {
                     echo "<option value='" . $playlist_row['name'] . "'>" . $playlist_row['name'] . "</option>";
                 }
-                echo "</select>
-                </form>";  
+                echo "</select>";
+                //</form>";  
             }
+            echo"</form>";
             echo"</div>";
     }
+    echo"</div>";
  }
 ?>
+
+
+
+<?php 
+    // Check if a song should be deleted
+    if (isset($_POST['delete']) && isset($_POST['id'])) {
+        $id = $_POST['id'];
+        //delete from playlist
+        $deleteSql = "DELETE FROM `playlistsongs` WHERE id = $id";
+        $conn->query($deleteSql);
+        // Delete from song database
+        $deleteSql = "DELETE FROM `songs` WHERE id = $id";
+        $conn->query($deleteSql);
+
+        // Set a JavaScript variable to indicate the deletion
+        echo '<script>var songDeleted = true;</script>';
+    }
+ ?>
+
+ <!--deleting song from playlist-->
+ <?php
+    if (isset($_POST['delete_playlist_song']) && isset($_POST['id'])){
+        $id = $_POST['id'];
+        $deleteSql = "DELETE FROM `playlistsongs` WHERE id = $id";
+        $conn->query($deleteSql);
+
+        // Set a JavaScript variable to indicate the deletion
+        echo '<script>var songDeleted = true;</script>';
+    }
+?>
+
+
+
+<script>
+    <?php
+    //Check if the song was deleted and add JavaScript to reload the page
+    if (isset($_POST['delete']) && isset($_POST['id'])) {
+        echo 'if (typeof songDeleted !== "undefined" && songDeleted) {';
+        echo'  <script>var songDeleted = true;
+        location.reload();</script>';
+ 
+    }
+    ?>
+</script> 

@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['uname'] = $uname;
         $_SESSION['user_id'] = $res['id'];
 
-        header('location: user.php');
+        header('location: index.php');
 
     } else {
         $error[] = 'Incorrect username or password';
@@ -29,13 +29,13 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="style.css" >
+    <link rel="stylesheet" href="stylee.css" >
      
 </head>
 <body>
     <div class="form-container">
         <form action="" method="post" class="form">
-            <h3>Login now</h3>
+            <h3>Login</h3>
             <?php
             if (!empty($error)) {
                 foreach ($error as $err) {
@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
             <input type="text" name="uname" placeholder="Enter your username" class="box" required>
             <input type="password" name="password" placeholder="Enter password" class="box" required>
             <input type="submit" value="Login now" name="submit" class="form-btn">
-            <p>Don't have an account? <a href="register.php">Register now</a></p>
+            <p>Don't have an account?<br> <a href="register.php">Register now</a></p>
         </form>
     </div>
 </body>

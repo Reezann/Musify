@@ -36,7 +36,7 @@
         // If the user doesn't exist and passwords match, insert the user's data into the database.
         $insert="INSERT INTO users(name,username,email,password) VALUES('$name','$uname','$email','$password')";
         mysqli_query($conn,$insert);
-        header('location:user.php');// Redirect to the header.php page upon successful registration.
+        header('location:index.php');// Redirect to the header.php page upon successful registration.
       }
     }
 
@@ -49,17 +49,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
 
-    <!--custom css file link-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylee.css">
 
 </head>
 <body >
   <div class="form-container">
     
     <form action="" method="post" >
-        <h3>Register now</h3>
+        <h3>Register</h3>
         <?php
           if (isset($error)) {
             foreach($error as $error){
@@ -67,13 +65,13 @@
             }
           }
         ?>
-        <input type="text" name="name" placeholder="enter name" class="box" required>
-        <input type="text" name="uname" placeholder="enter username" class="box" required>
-        <input type="email" name="email" placeholder="enter  email" class="box" required>
-        <input type="password" name="password" placeholder="enter password" class="box" required>
-        <input type="password" name="cpassword" placeholder="confirm password" class="box" required>
+        <input type="text" name="name" placeholder="Enter name" class="box" required>
+        <input type="text" name="uname" placeholder="Enter username" class="box" required>
+        <input type="email" name="email" placeholder="Enter  email" class="box" required>
+        <input type="password" name="password" placeholder="Enter password" class="box" required>
+        <input type="password" name="cpassword" placeholder="Confirm password" class="box" required>
         <input type="submit" value="register now" name="submit" class="form-btn">
-        <p>Already have an account? <a href="login.php">login now</a></p>
+        <p>Already have an account? <br><a href="login.php">Login now</a></p>
 
 
     </form>

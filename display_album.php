@@ -1,5 +1,7 @@
-<div class="gridViewContainer">
-    <?php
+<?php
+
+echo"<div class='gridViewContainer'>";
+
     $query = mysqli_query($conn,"SELECT * FROM album");
 
     while($row = mysqli_fetch_array($query)){
@@ -11,7 +13,6 @@
         </div>";
     }
     
-    ?>
-</div>
 
-
+echo"</div>";
+?>

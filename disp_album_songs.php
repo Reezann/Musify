@@ -1,8 +1,8 @@
 <?php
-session_start();
-include("config.php");
-include "common_functions.php";
-include "delete.php";
+    session_start();
+    include("config.php");
+    include "common_functions.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -10,13 +10,11 @@ include "delete.php";
 <head>   
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='stylesheet' href='style-a.css'>
-    <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='stylee.css'>
 
-    <script src='https://kit.fontawesome.com/065ccc13d0.js' crossorigin='anonymous'></script>
 </head>
 <body>
-    <div class="viewContainer">
+
     <?php
         include "nav.php"; 
     
@@ -28,11 +26,11 @@ include "delete.php";
 
         if (isset($_GET['playlist_id'])) {
             $id = $_GET['playlist_id'];
-            $songsQuery = mysqli_query($conn, "SELECT * FROM songs S, playlistsongs P WHERE (P.playlist_id='$id' AND P.song_id=S.id)");
+            $songsQuery = mysqli_query($conn, "SELECT S.* FROM songs S, playlistsongs P WHERE (P.playlist_id='$id' AND P.song_id=S.id)");
             display_songs($songsQuery, $conn);
         }
     ?>
-    </div>
+
 </body>
 </html>
 
